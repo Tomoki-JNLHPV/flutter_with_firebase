@@ -36,7 +36,7 @@ class _MyFirestorePageState extends State<ShowFirestoreData> {
             ),
             Container(
                 child: RaisedButton(
-              child: Text('前のページに戻るよ'),
+              child: Text('前のページ'),
               onPressed: () {
 // -*--*--*--*--*- Navigator -*--*--*--*--*-
                 Navigator.pop(context);
