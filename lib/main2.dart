@@ -92,7 +92,7 @@ class _FirestoreSaveState extends State<FirestoreSave> {
                 child: Text('キャンセル', style: TextStyle(color: Colors.black),),
               ),
               TextButton(
-                onPressed: !isEnabled?null:() async {
+                onPressed: () async {
                   await Firestore.instance.collection('user').document().setData({
                     'name': '${this.inputValue}',
                   });
