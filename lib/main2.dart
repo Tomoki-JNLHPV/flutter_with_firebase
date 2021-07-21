@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_with_firebase/show_firestore_data.dart';
+import 'package:flutter_with_firebase/show_firestore_data2.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,8 +19,7 @@ class MyApp extends StatelessWidget {
 
 class FirestoreSave extends StatefulWidget {
   @override
-  _FirestoreSaveState createState()
-  {
+  _FirestoreSaveState createState() {
     return _FirestoreSaveState();
   }
 }
@@ -39,21 +38,21 @@ class _FirestoreSaveState extends State<FirestoreSave> {
               onPressed: () {
                 _showDialog(context);
               },
-              child: Text("Add Data",
+              child: Text(
+                "Add Data",
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white
-                ),
+                style: TextStyle(color: Colors.white),
               ),
-                backgroundColor: Colors.lightGreen,
+              backgroundColor: Colors.lightGreen,
             ),
             Container(
               margin: EdgeInsets.only(bottom: 16.0),
               child: RaisedButton(
-                child:Text('次のページ'),
+                child: Text('次のページ'),
                 onPressed: () {
 // -*--*--*--*--*- Navigator -*--*--*--*--*-
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ShowFirestoreData()));
+                      MaterialPageRoute(builder: (context) => UserListPage()));
 // -*--*--*--*--*- Navigator -*--*--*--*--*-
                 },
               ),
@@ -63,6 +62,7 @@ class _FirestoreSaveState extends State<FirestoreSave> {
       ),
     );
   }
+
   _showDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -76,11 +76,11 @@ class _FirestoreSaveState extends State<FirestoreSave> {
                 hintText: 'name',
               ),
               onChanged: (text) {
-                  // 入力値があるなら、それを反映する。
-                  setState(() {
-                    this.inputValue = text;
-                  });
-                },
+                // 入力値があるなら、それを反映する。
+                setState(() {
+                  this.inputValue = text;
+                });
+              },
               autofocus: true,
               // keyboardType: TextInputType.number,
             ),
@@ -89,16 +89,25 @@ class _FirestoreSaveState extends State<FirestoreSave> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text('キャンセル', style: TextStyle(color: Colors.black),),
+                child: Text(
+                  'キャンセル',
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
               TextButton(
                 onPressed: () async {
-                  await Firestore.instance.collection('user').document().setData({
+                  await Firestore.instance
+                      .collection('user')
+                      .document()
+                      .setData({
                     'name': '${this.inputValue}',
                   });
                   Navigator.of(context).pop();
                 },
-                child: Text('追加', style: TextStyle(color: Colors.black),),
+                child: Text(
+                  '追加',
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
             ],
           ),
