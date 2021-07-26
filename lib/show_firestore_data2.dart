@@ -32,7 +32,7 @@ class UserListPage extends StatelessWidget {
                                   onPressed: () async {
                                     Navigator.of(context).pop();
 
-                                    //await deleteUser(context, model, user);
+                                    await deleteUser(context, model, user);
                                   },
                                 )
                               ],
@@ -49,39 +49,36 @@ class UserListPage extends StatelessWidget {
     );
   }
 
-  // Future deleteUser(
-  //   BuildContext context,
-  //   UserListModel model,
-  //   User user,
-  // ) async {
-  //   try {
-  //     await model.deleteUser(user);
-  //     await model.fetchUsers();
-  //   } catch (e) {
-  //     await _showDialog(context, e.toString());
-  //     print(e.toString());
-  //   }
-  // }
+  Future deleteUser(
+    BuildContext context,
+    UserListModel model,
+    User user,
+  ) async {
+    try {
+      await model.deleteUser(user);
+      await model.fetchUsers();
+    } catch (e) {
+      await _showDialog(context, e.toString());
+      print(e.toString());
+    }
+  }
 
-  // Future _showDialog(
-  //   BuildContext context,
-  //   String name,
-  // ) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return AlertDialog(
-  //         title: Text(name),
-  //         actions: <Widget>[
-  //           FlatButton(
-  //             child: Text('OK'),
-  //             onPressed: () {
-  //               Navigator.of(context).pop();
-  //             },
-  //           ),
-  //         ],
-  //       );
-  //     },
-  //   );
-  // }
+  Future<void> _showDialog(BuildContext context, String string) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('name'),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
